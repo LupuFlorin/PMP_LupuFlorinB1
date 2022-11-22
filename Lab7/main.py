@@ -49,5 +49,17 @@ if __name__ == "__main__":
 
     ppc = pm.sample_posterior_predictive(trace,samples=100, model=model)
 
+    plt.plot(speed, a_mean + bSpeed_mean * speed + bHard_mean * np.log(hardDrive), 'r')
+    sig = az.plot_hdi(speed, ppc['price_like'], hdi_prob=0.95, color='k')
+    plt.xlabel('Speed')
+    plt.ylabel('Cog. score', rotation=0)
+    plt.savefig('bayesian_regression_line_speed.png')
+
+    plt.plot(hardDrive, a_mean + bSpeed_mean * speed + bHard_mean * np.log(hardDrive), 'r')
+    sig = az.plot_hdi(hardDrive, ppc['price_like'], hdi_prob=0.95, color='k')
+    plt.xlabel('HardDrive')
+    plt.ylabel('Cog. score', rotation=0)
+    plt.savefig('bayesian_regression_line_HardDrive.png')
+
 
 
